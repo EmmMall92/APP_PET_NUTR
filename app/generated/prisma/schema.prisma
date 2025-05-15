@@ -1,0 +1,28 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+model Pet {
+  id            String   @id @default(cuid())
+  species       String // "dog" ή "cat"
+  age           Float
+  weight        Float
+  breedSize     String? // "small", "medium", "large", "giant"
+  lifeStage     String // "puppy", "adult", "senior", "pregnant"
+  activityLevel String // "low", "moderate", "high"
+  healthIssues  String[] // πίνακας κειμένου π.χ. ["sensitive stomach"]
+
+  createdAt DateTime @default(now())
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
