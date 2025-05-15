@@ -2,15 +2,13 @@
   "name": "pet-nutrition-app",
   "version": "0.1.0",
   "private": true,
-"scripts": {
-  "dev": "next dev --turbopack",
-  "build": "next build",
-  "start": "next start",
-  "lint": "next lint",
-  "postinstall": "prisma generate"
-},
-
-
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "postinstall": "prisma generate"
+  },
   "dependencies": {
     "@prisma/client": "^6.7.0",
     "formidable": "^3.5.4",
