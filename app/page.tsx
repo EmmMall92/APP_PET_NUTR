@@ -11,13 +11,13 @@ export default function Home() {
     const formData = new FormData(e.target);
     const petData = {
       species: formData.get('species'),
-      age: parseFloat(formData.get('age')),
-      weight: parseFloat(formData.get('weight')),
+      age: parseFloat((formData.get('age') as string) || '0'),
+      weight: parseFloat((formData.get('weight') as string) || '0'),
       breedSize: formData.get('breedSize'),
       lifeStage: formData.get('lifeStage'),
       activityLevel: formData.get('activityLevel'),
-      healthIssues: formData.get('healthIssues')?.split(',') || []
-    };
+      healthIssues: formData.get('healthIssues')?.toString().split(',') || []
+};
 
     const res = await fetch('/api/pets', {
       method: 'POST',
