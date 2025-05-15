@@ -5,29 +5,29 @@ import { useState } from 'react';
 export default function Home() {
   const [response, setResponse] = useState(null);
 
-  const handleSubmit = async (e: { preventDefault: () => void; target: HTMLFormElement | undefined; }) => {
-    e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
 
-    const formData = new FormData(e.target);
-    const petData = {
-      species: formData.get('species'),
-      age: parseFloat((formData.get('age') as string) || '0'),
-      weight: parseFloat((formData.get('weight') as string) || '0'),
-      breedSize: formData.get('breedSize'),
-      lifeStage: formData.get('lifeStage'),
-      activityLevel: formData.get('activityLevel'),
-      healthIssues: formData.get('healthIssues')?.toString().split(',') || []
-};
-
-    const res = await fetch('/api/pets', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(petData)
-    });
-
-    const data = await res.json();
-    setResponse(data);
+  const formData = new FormData(e.currentTarget);
+  const petData = {
+    species: formData.get('species'),
+    age: parseFloat((formData.get('age') as string) || '0'),
+    weight: parseFloat((formData.get('weight') as string) || '0'),
+    breedSize: formData.get('breedSize'),
+    lifeStage: formData.get('lifeStage'),
+    activityLevel: formData.get('activityLevel'),
+    healthIssues: formData.get('healthIssues')?.toString().split(',') || []
   };
+
+  const res = await fetch('/api/pets', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(petData)
+  });
+
+  const data = await res.json();
+  setResponse(data);
+};
 
   return (
     <main style={{ padding: 20 }}>
