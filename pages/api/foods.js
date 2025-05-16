@@ -43,7 +43,18 @@ export default async function handler(req, res) {
         kcalPerKg,
         gramsPerKg,
       } = req.body;
-
+          console.log("POST BODY:", req.body);
+   console.log("SAFE VALUES:", {
+  protein: safeFloat(protein),
+  fat: safeFloat(fat),
+  fiber: safeFloat(fiber),
+  sodium: safeFloat(sodium),
+  magnesium: safeFloat(magnesium),
+  calcium: safeFloat(calcium),
+  phosphorus: safeFloat(phosphorus),
+  kcalPerKg: safeInt(kcalPerKg),
+  gramsPerKg: safeInt(gramsPerKg),
+});
       const food = await prisma.food.create({
         data: {
           brand,
@@ -69,6 +80,9 @@ export default async function handler(req, res) {
       console.error("POST ERROR:", error);
       res.status(500).json({ error: 'Something went wrong.', details: error.message });
     }
+
+
+
   } else {
     res.status(405).json({ message: 'Method not allowed' });
   }
